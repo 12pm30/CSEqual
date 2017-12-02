@@ -27,13 +27,12 @@
     <video autoplay="true" id="videoElement">
     </video>
 </div>
-<input id="clickMe" type="button" value="Take my Photo!" onclick="takepicture();" />
-<input id="recognize" type="button" value="Recognize Try!"/>	
-<a id="download" download="Demo.png">Download as image</a>
+<input id="clickMe" type="button" value="Take my Photo!" onclick="takepicture();" />	
+<a id="download" download>Download as image</a>
 <canvas id="canvas">
   </canvas>
   <div class="output">
-    <img id="photo" alt="The screen capture will appear in this box.">
+    <img id="photo">
   </div>
 	
   <div class="image-container" class="image-container"> </div>
@@ -64,6 +63,7 @@
 	      clearphoto();
 	    }
 	  }
+	
 	function download() {
 		var canvas = document.getElementById('canvas');
     		var dt = canvas.toDataURL();
