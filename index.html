@@ -73,12 +73,35 @@
 	    }
 	}
 	
+	function getOS() {
+	  var userAgent = window.navigator.userAgent,
+	      platform = window.navigator.platform,
+	      macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+	      windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+	      iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+	      os = null;
+	
+	  if (macosPlatforms.indexOf(platform) !== -1) {
+	    os = 'Mac OS';
+	  } else if (iosPlatforms.indexOf(platform) !== -1) {
+	    os = 'iOS';
+	  } else if (windowsPlatforms.indexOf(platform) !== -1) {
+	    os = 'Windows';
+	  } else if (/Android/.test(userAgent)) {
+	    os = 'Android';
+	  } else if (!os && /Linux/.test(platform)) {
+	    os = 'Linux';
+	  }
+	  return os;
+	}
+	
 	function downloadCanvas(link, canvas, filename) {
     		link.href = document.getElementById(canvas).toDataURL();
    		link.download = filename;
 	}
 
 	document.getElementById('download').addEventListener('click', function() {
+		
 		var text = "test_";
     		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     		for(var i = 0; i < possible.length; i++) {
@@ -86,6 +109,12 @@
     		}
 		text += ".png"
     		downloadCanvas(this, 'canvas', text);
+		var os = getOS();
+		
+		if(os == "Windows")
+			text = "C:\Users\Parv\Downloads\" + text;
+		else
+		   	text = "/Users/johancornelissen/Downloads/" + text;
 	}, false);
 	
 	function clearphoto() {
