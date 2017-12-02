@@ -16,7 +16,7 @@
 /* global $, Spinner*/
 'use strict';
 
-function() {
+$(document).ready(function() {
 
   var opts = {
     lines: 13, // The number of lines to draw
@@ -156,4 +156,4 @@ function() {
   $('#picture-field').on('change', imageSelected);
   $('#play-sound').on('click', speak);
 
-}
+});
