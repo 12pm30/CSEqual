@@ -35,11 +35,15 @@
     <img id="photo" alt="The screen capture will appear in this box.">
   </div>
 	
-  <div class="image-selector">
-	<input id="picture-field" type="file" capture="camera" accept='image/x-png, image/jpg, image/gif, image/jpeg, image/png', title='Choose an image to upload' />
- </div>
+  <div class="image-container" class="image-container"> </div>
 	
 <script src="public/js/ui.js"></script>
+<script type="text/javascript" src="public/js/vendor/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="public/js/vendor/ratchet.min.js"></script>
+<script type="text/javascript" src="public/js/vendor/spin.min.js"></script>
+<script type="text/javascript" src="public/js/audio.js"></script>
+<script type="text/javascript" src="public/js/api.js"></script>
+	
 <script>
 	function takepicture() {
 	    var video = document.getElementById('videoElement');
@@ -55,7 +59,7 @@
 	      context.drawImage(video, 0, 0, width, height);
 	      var data = canvas.toDataURL('image/png');
 	      var canvas = document.getElementById("canvas");
-              $('#picture-field').click();
+              recognize(data);
 	    } else {
 	      clearphoto();
 	    }
