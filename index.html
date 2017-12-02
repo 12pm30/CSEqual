@@ -28,7 +28,7 @@
     </video>
 </div>
 <input id="clickMe" type="button" value="Take my Photo!" onclick="takepicture();" />
-<input id="TestApi" type="button" value="Take my Photo!" onclick="testWatsonApi();" />
+<input id="TestApi" type="button" value="Test Api!" onclick="testWatsonApi();" />
 <canvas id="canvas">
   </canvas>
   <div class="output">
@@ -91,17 +91,13 @@
 
 	    visual_recognition.classify({'url': 'https://raw.githubusercontent.com/watson-developer-cloud/doc-tutorial-downloads/master/visual-recognition/fruitbowl.jpg'}, function(err, res) {
 	      if (err)
-	        reject(err);
+	          console.log(err.message));
 	      else
-	        resolve(res);
+			  console.log(JSON.stringify(res, null, 2)));
 	    });
 	  });
 	}
 	
-	if (require.main === module)
-	  testWatsonApi()
-	    .then((results) => console.log(JSON.stringify(results, null, 2)))
-	    .catch((error) => console.log(error.message));
 </script>
 <script>
 	var video = document.querySelector("#videoElement");
