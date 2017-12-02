@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # -*- coding: utf-8 -*-
 import urllib2
 import urllib
@@ -33,9 +35,7 @@ try:
     resp = urllib2.urlopen(req, timeout=5)
     #get response
     qrcont=resp.read()
-    for item in qrcont:
-        print item
-    #print qrcont
+    print qrcont
 
 except urllib2.HTTPError as e:
     print e.read()
