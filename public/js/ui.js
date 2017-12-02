@@ -16,6 +16,8 @@
 /* global $, Spinner*/
 'use strict';
 
+function() {
+
   var opts = {
     lines: 13, // The number of lines to draw
     length: 20, // The length of each line
@@ -153,3 +155,5 @@
   $('#capture-button').on('click', selectImage);
   $('#picture-field').on('change', imageSelected);
   $('#play-sound').on('click', speak);
+
+}
