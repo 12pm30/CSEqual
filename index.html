@@ -28,7 +28,7 @@
     </video>
 </div>
 <input id="clickMe" type="button" value="Take my Photo!" onclick="takepicture();" />	
-<a id="download" download>Download as image</a>
+<a id="download">Download as image</a>
 <canvas id="canvas">
   </canvas>
   <div class="output">
@@ -64,11 +64,15 @@
 	    }
 	  }
 	
-	function download() {
-		var canvas = document.getElementById('canvas');
-    		var dt = canvas.toDataURL();
-    		this.href = dt; //this may not work in the future..
-	}
+	function downloadCanvas(link, canvas, filename) {
+    link.href = document.getElementById(canvas).toDataURL();
+    link.download = filename;
+}
+
+document.getElementById('download').addEventListener('click', function() {
+    downloadCanvas(this, 'canvas', 'test.png');
+}, false);
+	
 	function clearphoto() {
 		var video = document.getElementById('videoElement');
     		var canvas = document.getElementById('canvas');
