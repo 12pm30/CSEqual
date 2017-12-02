@@ -34,6 +34,9 @@
   <div class="output">
     <img id="photo" alt="The screen capture will appear in this box.">
   </div>
+  <div id="output2">
+    
+  </div>
 <script src="http://hongru.github.io/proj/canvas2image/canvas2image.js"></script>
 <script>
 	function takepicture() {
@@ -91,9 +94,9 @@
 
 	    visual_recognition.classify({'url': 'https://raw.githubusercontent.com/watson-developer-cloud/doc-tutorial-downloads/master/visual-recognition/fruitbowl.jpg'}, function(err, res) {
 	      if (err)
-	          console.log(err.message));
+	          document.getElementById("output2").innerHTML = err.message;
 	      else
-			  console.log(JSON.stringify(res, null, 2)));
+			  document.getElementById("output2").innerHTML = JSON.stringify(res, null, 2);
 	    });
 	  });
 	}
