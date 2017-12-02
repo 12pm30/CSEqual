@@ -37,7 +37,7 @@ module.exports.recognize = function(req, res, next) {
   };
   
 
-  visualRecognition.classify(params, function(error, result) {
+  visualRecognition.detectFaces(params, function(error, result) {
 		// delete the recognized file
     if (req.file)
       fs.unlink(req.body.filePath);

@@ -9,7 +9,15 @@
   
 <style>
 #container {
-    margin: 0px auto;
+	display: inline-block;
+	margin-left: 4%;
+    width: 500px;
+    height: 375px;
+    border: 10px #333 solid;
+}
+#container2 {
+	display: inline-block;
+	margin-right: 4%;
     width: 500px;
     height: 375px;
     border: 10px #333 solid;
@@ -22,29 +30,46 @@
 #download {
 	    cursor:pointer;
 	    color:#666666;
-	    padding:3px;
 	}
 #download:hover {
+	    color:#000000;
+	}
+.button {
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #FFFFFF;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  border-radius: 25px;
+  cursor:pointer;
+  color:#666666;
+}
+.button:hover {
 	    color:#000000;
 	}
 </style>
 </head>
   
 <body>
-<div id="container">
+<div id="container" style="float:left;">
     <video autoplay="true" id="videoElement">
     </video>
 </div>
-<input id="clickMe" type="button" value="Take my Photo!" onclick="takepicture();" />	
-<a id="download">Download as image</a>
-	<br>
-<canvas id="canvas">
-  </canvas>
-	<br>
-  <div class="output">
-    <img id="photo">
-  </div>
-<h2 id="image-name"></h2>
+<div id="container2" style="float:right;">
+	<canvas id="canvas">
+	  </canvas>
+</div>
+<div style="clear: left; clear: right;"/>
+<br>
+<div style="text-align: center;">
+	<input class=button id="clickMe" type="button" value="Take my Photo!" onclick="takepicture();" style="margin-right: 20px;"/>
+	<a class=button id="download">Download Photo and Run Analysis!</a>
+</div>
+<h2 id="age"></h2>
+<h2 id="gender"></h2>
 	
   <div class="image-container" class="image-container"> </div>
 	
@@ -123,7 +148,7 @@
 		
 		setTimeout(function(){
 		    recognize(text);
-		}, 2000);		
+		}, 400);		
 		
 	}, false);
 	
@@ -261,6 +286,7 @@
   }
 
   function onSuccess(textObj, translationObj) {
+	  console.log(textObj);
     var image = textObj.images ? textObj.images[0] : {},
       classifiers = image.classifiers || [],
       classifier = classifiers[0],
@@ -271,7 +297,9 @@
     result.data('text', text);
     result.data('translation', translation);
 
-    $('h2', result).html(toTitleCase(text));
+    document.getElementById('age').innerHTML ="Age: " + toTitleCase(textObj.images[0].faces[0].age.min)+"-"+toTitleCase(textObj.images[0].faces[0].age.max);
+	document.getElementById('gender').innerHTML ="Gender: " + toTitleCase(textObj.images[0].faces[0].gender.gender);
+	
     $('h3', result).html(translation);
     result.animate({ 'bottom': '+=85px' }, 'slow');
     spinner.stop();
