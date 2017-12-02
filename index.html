@@ -28,16 +28,17 @@
     </video>
 </div>
 <input id="clickMe" type="button" value="Take my Photo!" onclick="takepicture();" />
-<input id="TestApi" type="button" value="Test Api!" onclick="testWatsonApi();" />
+	
 <canvas id="canvas">
   </canvas>
   <div class="output">
     <img id="photo" alt="The screen capture will appear in this box.">
   </div>
-  <div id="output2">
-    
-  </div>
-<script src="http://hongru.github.io/proj/canvas2image/canvas2image.js"></script>
+	
+  <div class="image-selector">
+	<input id="picture-field" type="file" capture="camera" accept='image/x-png, image/jpg, image/gif, image/jpeg, image/png', title='Choose an image to upload' />
+ </div>
+	
 <script src="public/js/ui.js"></script>
 <script>
 	function takepicture() {
@@ -54,7 +55,7 @@
 	      context.drawImage(video, 0, 0, width, height);
 	      var data = canvas.toDataURL('image/png');
 	      var canvas = document.getElementById("canvas");
-              $('#capture-button').click();
+              $('#picture-field').click();
 	    } else {
 	      clearphoto();
 	    }
