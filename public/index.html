@@ -49,7 +49,7 @@
 }
 .button:hover {
 	    color:#000000;
-	}
+	}	
 </style>
 </head>
   
@@ -68,6 +68,7 @@
 	<input class=button id="clickMe" type="button" value="Take my Photo!" onclick="takepicture();" style="margin-right: 20px;"/>
 	<a class=button id="download">Download Photo and Run Analysis!</a>
 </div>
+<h1 id="numFaces"/>
 <h2 id="age"></h2>
 <h2 id="gender"></h2>
 	
@@ -145,6 +146,11 @@
 		else {
 		   	text = "/Users/johancornelissen/Downloads/" + text;
 		}
+		
+		document.getElementById("numFaces").innerHTML = "LOADING.............";
+	    document.getElementById("age").innerHTML ="";
+		document.getElementById("gender").innerHTML ="";
+		
 		
 		setTimeout(function(){
 		    recognize(text);
@@ -297,9 +303,20 @@
     result.data('text', text);
     result.data('translation', translation);
 
-    document.getElementById('age').innerHTML ="Age: " + toTitleCase(textObj.images[0].faces[0].age.min)+"-"+toTitleCase(textObj.images[0].faces[0].age.max);
-	document.getElementById('gender').innerHTML ="Gender: " + toTitleCase(textObj.images[0].faces[0].gender.gender);
-	
+	var ages = "";
+	var genders = "";
+	for (var i = 0; i < textObj.images[0].faces.length; i++) { 
+		document.getElementById("numFaces").innerHTML = "Number of faces identified: " + (i + 1);
+	    ages += toTitleCase(textObj.images[0].faces[i].age.min)+"-"+toTitleCase(textObj.images[0].faces[i].age.max);
+		genders += toTitleCase(textObj.images[0].faces[i].gender.gender);
+		if (i <= textObj.images[0].faces.length-2) {
+			ages += ", ";
+			genders += ", ";
+		}
+	}
+    document.getElementById("age").innerHTML ="Age: " + ages;
+	document.getElementById("gender").innerHTML ="Gender: " + genders;
+    
     $('h3', result).html(translation);
     result.animate({ 'bottom': '+=85px' }, 'slow');
     spinner.stop();
