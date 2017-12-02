@@ -29,6 +29,7 @@
 </div>
 <input id="clickMe" type="button" value="Take my Photo!" onclick="takepicture();" />
 <input id="recognize" type="button" value="Recognize Try!"/>	
+<a id="download" download="Demo.png">Download as image</a>
 <canvas id="canvas">
   </canvas>
   <div class="output">
@@ -59,12 +60,15 @@
 	      context.drawImage(video, 0, 0, width, height);
 	      var data = canvas.toDataURL('image/png');
 	      var canvas = document.getElementById("canvas");
-	      recognize(data);
 	    } else {
 	      clearphoto();
 	    }
 	  }
-	
+	function download() {
+		var canvas = document.getElementById('canvas');
+    		var dt = canvas.toDataURL();
+    		this.href = dt; //this may not work in the future..
+	}
 	function clearphoto() {
 		var video = document.getElementById('videoElement');
     		var canvas = document.getElementById('canvas');
