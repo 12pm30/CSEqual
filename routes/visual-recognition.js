@@ -26,18 +26,21 @@ var visualRecognition = watson.visual_recognition({
 });
 
 module.exports.recognize = function(req, res, next) {
-  if (!req.file  && !req.file.path) {
-    return next({ error: 'Missing required parameter: file', code: 400 });
-  }
+  console.log(req.body.filePath);
+  //if (!req.file  && !req.file.path) {
+  //  return next({ error: 'Missing required parameter: file', code: 400 });
+  //}
+
 
   var params = {
-    images_file: fs.createReadStream(req.file.path)
+    images_file: fs.createReadStream(req.body.filePath)
   };
+  
 
   visualRecognition.classify(params, function(error, result) {
 		// delete the recognized file
     if (req.file)
-      fs.unlink(req.file.path);
+      fs.unlink(req.body.filePath);
 
     if (error) {
       return next(error);

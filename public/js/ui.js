@@ -61,7 +61,7 @@ $(document).ready(function() {
       var img = $(new Image()).attr('src', URL.createObjectURL(files[0]));
       $('#image-container').append(img);
 
-      recognize(files[0]);
+      recognize(files[0].name);
 
       setTimeout(function() {
         spinner.spin($('.content')[0]);

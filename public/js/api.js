@@ -37,7 +37,7 @@ $( document ).ready(function() {
       }
 
       var formData = new FormData();
-      formData.append('images_file', file);
+      formData.append('filePath', file);
 
       return $.ajax({
         url: baseURI + 'recognize',

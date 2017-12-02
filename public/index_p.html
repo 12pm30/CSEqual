@@ -19,14 +19,6 @@
     height: 375px;
     background-color: #666;
 }
-#download {
-	    cursor:pointer;
-	    color:#666666;
-	    padding:3px;
-	}
-#download:hover {
-	    color:#000000;
-	}
 </style>
 </head>
   
@@ -35,12 +27,12 @@
     <video autoplay="true" id="videoElement">
     </video>
 </div>
-<input id="clickMe" type="button" value="Take my Photo!" onclick="takepicture();" />	
-<a id="download">Download as image</a>
+<input id="clickMe" type="button" value="Take my Photo!" onclick="takepicture();" />
+<input id="recognize" type="button" value="Recognize Try!"/>	
 <canvas id="canvas">
   </canvas>
   <div class="output">
-    <img id="photo">
+    <img id="photo" alt="The screen capture will appear in this box.">
   </div>
 	
   <div class="image-container" class="image-container"> </div>
@@ -53,7 +45,6 @@
 <script type="text/javascript" src="js/ui.js"></script>
 	
 <script>
-	
 	function takepicture() {
 	    var video = document.getElementById('videoElement');
     	    var canvas = document.getElementById('canvas');
@@ -68,61 +59,11 @@
 	      context.drawImage(video, 0, 0, width, height);
 	      var data = canvas.toDataURL('image/png');
 	      var canvas = document.getElementById("canvas");
+	      recognize('image/png');
 	    } else {
 	      clearphoto();
 	    }
-	}
-	
-	function getOS() {
-	  var userAgent = window.navigator.userAgent,
-	      platform = window.navigator.platform,
-	      macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
-	      windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
-	      iosPlatforms = ['iPhone', 'iPad', 'iPod'],
-	      os = null;
-	
-	  if (macosPlatforms.indexOf(platform) !== -1) {
-	    os = 'Mac OS';
-	  } else if (iosPlatforms.indexOf(platform) !== -1) {
-	    os = 'iOS';
-	  } else if (windowsPlatforms.indexOf(platform) !== -1) {
-	    os = 'Windows';
-	  } else if (/Android/.test(userAgent)) {
-	    os = 'Android';
-	  } else if (!os && /Linux/.test(platform)) {
-	    os = 'Linux';
 	  }
-	  return os;
-	}
-	
-	function downloadCanvas(link, canvas, filename) {
-    	link.href = document.getElementById(canvas).toDataURL();
-   		link.download = filename;
-	}
-
-	document.getElementById('download').addEventListener('click', function() {
-		
-		var text = "test_";
-    		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    		for(var i = 0; i < possible.length; i++) {
-        		text += possible.charAt(Math.floor(Math.random() * possible.length));
-    		}
-		text += ".png"
-    		downloadCanvas(this, 'canvas', text);
-		var os = getOS();
-		
-		if(os === "Windows") {
-			text = "C:\Users\Parv\Downloads\\" + text;
-		}
-		else {
-		   	text = "/Users/johancornelissen/Downloads/" + text;
-		}
-		
-		setTimeout(function(){
-		    recognize(text);
-		}, 2000);		
-		
-	}, false);
 	
 	function clearphoto() {
 		var video = document.getElementById('videoElement');
@@ -139,8 +80,34 @@
     		var data = canvas.toDataURL('image/png');
     		photo.setAttribute('src', data);
   	}
-</script>
 	
+	function testWatsonApi() {
+	  return new Promise(function (resolve, reject) {
+	    var res = {};
+
+	    const VisualRecognitionV3 =
+	      require('watson-developer-cloud/visual-recognition/v3');
+
+	    var url = 'https://sandbox-watson-proxy.mybluemix.net/visual-recognition/api' ;
+	    var use_unauthenticated =  true ;
+
+	    const visual_recognition = new VisualRecognitionV3({
+	      'api_key': '',
+	      'version_date': '2016-05-20',
+	      'url' : url,
+	      'use_unauthenticated': use_unauthenticated
+	    });
+
+	    visual_recognition.classify({'url': 'https://raw.githubusercontent.com/watson-developer-cloud/doc-tutorial-downloads/master/visual-recognition/fruitbowl.jpg'}, function(err, res) {
+	      if (err)
+	          document.getElementById("output2").innerHTML = err.message;
+	      else
+			  document.getElementById("output2").innerHTML = JSON.stringify(res, null, 2);
+	    });
+	  });
+	}
+	
+</script>
 <script>
 	var video = document.querySelector("#videoElement");
  
