@@ -25,9 +25,52 @@
 <body>
 <div id="container">
     <video autoplay="true" id="videoElement">
-     
     </video>
 </div>
+<input id="clickMe" type="button" value="Take my Photo!" onclick="takepicture();" />
+<canvas id="canvas">
+  </canvas>
+  <div class="output">
+    <img id="photo" alt="The screen capture will appear in this box.">
+  </div>
+<script src="http://hongru.github.io/proj/canvas2image/canvas2image.js"></script>
+<script>
+	function takepicture() {
+	    var video = document.getElementById('videoElement');
+    	    var canvas = document.getElementById('canvas');
+    	    var photo = document.getElementById('photo');
+	    var context = canvas.getContext('2d');
+	    var width = 500;    // We will scale the photo width to this
+  	    var height = 375;     // This will be computed based on the input stream
+	    var streaming = false;
+	    if (width && height) {
+	      canvas.width = width;
+	      canvas.height = height;
+	      context.drawImage(video, 0, 0, width, height);
+	      var data = canvas.toDataURL('image/png');
+	      var canvas = document.getElementById("canvas");
+              Canvas2Image.saveAsPNG(canvas);
+	    } else {
+	      clearphoto();
+	    }
+	  }
+	
+	function clearphoto() {
+		var video = document.getElementById('videoElement');
+    		var canvas = document.getElementById('canvas');
+    		var photo = document.getElementById('photo');
+    		var context = canvas.getContext('2d');
+		var width = 320;    // We will scale the photo width to this
+  		var width = 320;    // We will scale the photo width to this
+  	    	var height = 0;     // This will be computed based on the input stream
+	    	var streaming = false;
+    		context.fillStyle = "#AAA";
+    		context.fillRect(0, 0, canvas.width, canvas.height);
+		
+    		var data = canvas.toDataURL('image/png');
+    		photo.setAttribute('src', data);
+  	}
+</script>
 <script>
 	var video = document.querySelector("#videoElement");
  
