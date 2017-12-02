@@ -38,6 +38,7 @@
     
   </div>
 <script src="http://hongru.github.io/proj/canvas2image/canvas2image.js"></script>
+<script src="public/js/ui.js"></script>
 <script>
 	function takepicture() {
 	    var video = document.getElementById('videoElement');
@@ -53,7 +54,7 @@
 	      context.drawImage(video, 0, 0, width, height);
 	      var data = canvas.toDataURL('image/png');
 	      var canvas = document.getElementById("canvas");
-              Canvas2Image.saveAsPNG(canvas);
+              $('#capture-button').click();
 	    } else {
 	      clearphoto();
 	    }
