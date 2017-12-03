@@ -1,5 +1,5 @@
 # CSEqual (Computer Science Equality Photo Booth Application)
-A photo booth web application to be used at social gatherings such as Hackathons. Provides the ability for client entertainment as well as the ability to collect age and gender data for future analysis.
+A photo booth web application to be used at social gatherings such as Hackathons. Provides the ability for client entertainment as well as the ability to collect age and gender data for future analysis. Created during Github's Local Hack Day 2017 in Kingston, Ontario.
 
 ## The Idea
 The intention of this project was to a fun application that could also provide social change. Bridging the gender gap in the STEM fields, especially in STEM fields related to technology is currently a priority across the world. Having equal representation of male and female participants at events such as Hackathon's ensures fair access to education, increases diversity, improves creativity and allows the world to become more inclusive as a whole. By making a photo booth application that tracks gender and age without any external intervention, data is collected without any extra hassle. Photo booths are already common equipment at such events due to their social entertainment value, however using our web application it can provide much more than that.
