@@ -14,12 +14,12 @@ The web application is built using HTML, CSS and javascript hosted on GitHub's p
 
 ## How to use
 1. Clone this repository
-2. Launch the backend by executing "node app.js". Ensure NodeJs is installed and any other prerequisites necessary.
+2. Launch the backend by executing "node CSEqualBackend.js". Ensure NodeJs is installed and any other prerequisites necessary.
 3. Navigate to http://localhost:3000/ to test out the app locally. See screenshots below for information on how to use the user interface.
 
 ## Expansion Ideas
  * Host the backend on a cloud server.
- 	* Currently the backend is hosted on a local machine which is not condusive to multiple front end units or for transferring the application between computers. Launching the backend on a server can be as simple as running "node app.js" in an Amazon AWS or Microsoft Azure instance.
+ 	* Currently the backend is hosted on a local machine which is not condusive to multiple front end units or for transferring the application between computers. Launching the backend on a server can be as simple as running "node CSEqualBackend.js" in an Amazon AWS or Microsoft Azure instance.
  * Include more statistics in summary, including age, emotion (happy, sad, angry), and ethnicity.
  * Provide an in-depth report with creative visuals for displaying trend information.
  	* Could make use of ElasticSearch and Kibana for displaying visuals such as graphs.
