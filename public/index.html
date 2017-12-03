@@ -77,11 +77,14 @@
 	<input class=button id="clickMe" type="button" value="Take my Photo!" onclick="takepicture();" style="margin-right: 20px;"/>
 	<a class=button id="download">Download Photo and Run Analysis!</a>
 </div>
-<h1 id="numFaces"/>
-<h2 id="age"></h2>
-<h2 id="gender"></h2>
+<h1 style="display: inline-block;margin-bottom:0px;margin-top:10px; margin-left:4%;" id="numFaces"/> <h1 style="float: right;margin-bottom:0px;margin-top:10px;margin-right:4%;" id="summaryHeading"></h1>
+<br style="line-height:3px;">
+<h2 style="display: inline-block;margin-bottom:0px;margin-top:4px;margin-left:4%;" id="age"></h2> <h2 style="float: right;margin-bottom:0px;margin-top:4px;margin-right:4%;" id="genderMaleSummary"></h2>
+<br style="line-height:3px;">
+<h2 style="display: inline-block;margin-bottom:0px;margin-top:4px;margin-left:4%;" id="gender"></h2> <h2 style="float: right;margin-bottom:0px;margin-top:4px;margin-right:4%;" id="genderFemaleSummary"></h2>
+
 	
-  <div class="image-container" class="image-container"> </div>
+<div class="image-container" class="image-container"> </div>
 	
 <script type="text/javascript" src="js/vendor/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/vendor/ratchet.min.js"></script>
@@ -223,6 +226,9 @@
     top: '50%', // Top position relative to parent
     left: '50%' // Left position relative to parent
   };
+  
+	var male = 0;
+	var female = 0;
 
   var spinner = new Spinner(opts);
   var player = $.AudioPlayer();
@@ -322,9 +328,20 @@
 			ages += ", ";
 			genders += ", ";
 		}
+		if (toTitleCase(textObj.images[0].faces[i].gender.gender) === "Male") {
+			male += 1;
+		}
+		if (toTitleCase(textObj.images[0].faces[i].gender.gender) === "Female") {
+			female += 1;
+		}
 	}
     document.getElementById("age").innerHTML ="Age: " + ages;
 	document.getElementById("gender").innerHTML ="Gender: " + genders;
+	
+	document.getElementById("summaryHeading").innerHTML = "Gender Summary:";
+    document.getElementById("genderMaleSummary").innerHTML ="Female: " + female;
+	document.getElementById("genderFemaleSummary").innerHTML ="Male: " + male;
+	
     
     $('h3', result).html(translation);
     result.animate({ 'bottom': '+=85px' }, 'slow');
